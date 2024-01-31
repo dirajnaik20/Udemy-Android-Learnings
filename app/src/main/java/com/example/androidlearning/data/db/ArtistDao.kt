@@ -11,11 +11,11 @@ import com.example.androidlearning.data.model.artist.Artist
 interface ArtistDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveArtists(artists: LiveData<Artist>)
+    suspend fun saveArtists(artists: List<Artist>)
 
     @Query("DELETE FROM popular_artists")
     suspend fun deleteAllArtists()
 
     @Query("SELECT * FROM popular_artists")
-    suspend fun getAllArtists(): LiveData<Artist>
+    suspend fun getAllArtists(): List<Artist>
 }
