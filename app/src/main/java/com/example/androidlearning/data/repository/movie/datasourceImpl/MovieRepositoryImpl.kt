@@ -48,7 +48,7 @@ class MovieRepositoryImpl(
         catch (exception:Exception){
             Log.i("MyTag",exception.message.toString())
         }
-        if (movieList.size>0){
+        if (movieList.isNotEmpty()){
             return movieList
         }
         else{
@@ -65,7 +65,7 @@ class MovieRepositoryImpl(
         catch (exception:Exception){
             Log.i("MyTag",exception.message.toString())
         }
-        if (movieList.size>0){
+        if (movieList.isNotEmpty()){
             return movieList
         }
         else{

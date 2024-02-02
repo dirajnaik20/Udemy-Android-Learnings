@@ -7,11 +7,14 @@ import com.example.androidlearning.presentation.di.movie.MovieSubComponent
 import com.example.androidlearning.presentation.di.tvshow.TvShowSubComponent
 import dagger.Component
 import dagger.Subcomponent
+import javax.inject.Singleton
 
+@Singleton
 @Component(
     modules = [AppModule::class,
         CacheDataModule::class,
         DataBaseModule::class,
+        RepositoryModule::class,
         DataBaseModule::class,
         LocalDataModule::class,
         NetModule::class,
