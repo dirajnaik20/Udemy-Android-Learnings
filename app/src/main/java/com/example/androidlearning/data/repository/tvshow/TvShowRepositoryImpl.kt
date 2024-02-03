@@ -1,14 +1,11 @@
-package com.example.androidlearning.data.repository.tvshow.datasourceImpl
+package com.example.androidlearning.data.repository.tvshow
 
 import android.util.Log
-import com.example.androidlearning.data.model.movie.MovieList
 import com.example.androidlearning.data.model.tvshow.TvShow
-import com.example.androidlearning.data.model.tvshow.TvShowList
 import com.example.androidlearning.data.repository.tvshow.datasource.TvShowCacheDatasource
 import com.example.androidlearning.data.repository.tvshow.datasource.TvShowLocalDatasource
 import com.example.androidlearning.data.repository.tvshow.datasource.TvShowRemoteDatasource
 import com.example.androidlearning.domain.repository.TvShowRepository
-import retrofit2.Response
 
 class TvShowRepositoryImpl(
     private val tvShowRemoteDatasource: TvShowRemoteDatasource,
@@ -16,7 +13,7 @@ class TvShowRepositoryImpl(
     private val tvShowCacheDatasource: TvShowCacheDatasource
 ) : TvShowRepository {
     override suspend fun getTvShows(): List<TvShow>? {
-        return tvShowCacheDatasource.getTvShowsFromCache()
+        return getTvShowsFromCache()
     }
 
     override suspend fun updateTvShows(): List<TvShow>? {

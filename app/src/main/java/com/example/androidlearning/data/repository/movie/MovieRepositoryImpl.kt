@@ -1,8 +1,7 @@
-package com.example.androidlearning.data.repository.movie.datasourceImpl
+package com.example.androidlearning.data.repository.movie
 
 import android.util.Log
 import com.example.androidlearning.data.model.movie.Movie
-import com.example.androidlearning.data.model.movie.MovieList
 import com.example.androidlearning.data.repository.movie.datasource.MovieCacheDatasource
 import com.example.androidlearning.data.repository.movie.datasource.MovieLocalDatasource
 import com.example.androidlearning.data.repository.movie.datasource.MovieRemoteDatasource

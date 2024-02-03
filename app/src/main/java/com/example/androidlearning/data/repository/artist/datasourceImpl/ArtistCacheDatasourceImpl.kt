@@ -6,7 +6,7 @@ import com.example.androidlearning.data.repository.artist.datasource.ArtistCache
 
 class ArtistCacheDatasourceImpl:ArtistCacheDatasource{
 
-    lateinit var artistList: ArrayList<Artist>
+    private var artistList= ArrayList<Artist>()
     override suspend fun getArtistFromCache(): List<Artist> {
         return artistList
     }

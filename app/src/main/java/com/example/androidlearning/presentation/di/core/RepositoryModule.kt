@@ -1,18 +1,17 @@
 package com.example.androidlearning.presentation.di.core
 
-import com.example.androidlearning.data.model.artist.Artist
 import com.example.androidlearning.data.repository.artist.datasource.ArtistCacheDatasource
 import com.example.androidlearning.data.repository.artist.datasource.ArtistLocalDatasource
 import com.example.androidlearning.data.repository.artist.datasource.ArtistRemoteDatasource
-import com.example.androidlearning.data.repository.artist.datasourceImpl.ArtistRepositoryImpl
+import com.example.androidlearning.data.repository.artist.ArtistRepositoryImpl
 import com.example.androidlearning.data.repository.movie.datasource.MovieCacheDatasource
 import com.example.androidlearning.data.repository.movie.datasource.MovieLocalDatasource
 import com.example.androidlearning.data.repository.movie.datasource.MovieRemoteDatasource
-import com.example.androidlearning.data.repository.movie.datasourceImpl.MovieRepositoryImpl
+import com.example.androidlearning.data.repository.movie.MovieRepositoryImpl
 import com.example.androidlearning.data.repository.tvshow.datasource.TvShowCacheDatasource
 import com.example.androidlearning.data.repository.tvshow.datasource.TvShowLocalDatasource
 import com.example.androidlearning.data.repository.tvshow.datasource.TvShowRemoteDatasource
-import com.example.androidlearning.data.repository.tvshow.datasourceImpl.TvShowRepositoryImpl
+import com.example.androidlearning.data.repository.tvshow.TvShowRepositoryImpl
 import com.example.androidlearning.domain.repository.ArtistRepository
 import com.example.androidlearning.domain.repository.MovieRepository
 import com.example.androidlearning.domain.repository.TvShowRepository

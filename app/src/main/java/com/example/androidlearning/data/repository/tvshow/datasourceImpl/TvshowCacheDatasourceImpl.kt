@@ -6,7 +6,7 @@ import com.example.androidlearning.data.repository.tvshow.datasource.TvShowRemot
 
 class TvshowCacheDatasourceImpl: TvShowCacheDatasource {
 
-    private lateinit var tvShowList:ArrayList<TvShow>
+    private var tvShowList=ArrayList<TvShow>()
     override suspend fun getTvShowsFromCache(): List<TvShow> {
         return tvShowList
     }

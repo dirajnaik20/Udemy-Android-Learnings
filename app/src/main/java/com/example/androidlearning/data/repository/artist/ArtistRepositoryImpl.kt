@@ -1,4 +1,4 @@
-package com.example.androidlearning.data.repository.artist.datasourceImpl
+package com.example.androidlearning.data.repository.artist
 
 import android.util.Log
 import com.example.androidlearning.data.model.artist.Artist
@@ -13,7 +13,7 @@ class ArtistRepositoryImpl(
     private val artistCacheDatasource: ArtistCacheDatasource
 ) : ArtistRepository {
     override suspend fun getArtists(): List<Artist>? {
-        return artistCacheDatasource.getArtistFromCache()
+        return getArtistsFromCache()
     }
 
     override suspend fun updateArtists(): List<Artist>? {
