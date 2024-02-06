@@ -11,9 +11,12 @@ import com.example.androidlearning.data.repository.tvshow.datasource.TvShowCache
 import com.example.androidlearning.data.repository.tvshow.datasourceImpl.TvshowCacheDatasourceImpl
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
+@InstallIn(SingletonComponent::class)
 class CacheDataModule {
 
     @Singleton

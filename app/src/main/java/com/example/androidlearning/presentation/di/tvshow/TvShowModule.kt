@@ -5,11 +5,15 @@ import com.example.androidlearning.domain.usecase.UpdateTvShowsUseCase
 import com.example.androidlearning.presentation.tvshow.TvShowViewModelFactory
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.scopes.ActivityScoped
+import dagger.hilt.components.SingletonComponent
 
 @Module
+@InstallIn(SingletonComponent::class)
 class TvShowModule {
 
-    @TvShowScope
+//    @ActivityScoped
     @Provides
     fun providerTvShowViewModelFactory(
         getTvShowsUseCase: GetTvShowsUseCase,

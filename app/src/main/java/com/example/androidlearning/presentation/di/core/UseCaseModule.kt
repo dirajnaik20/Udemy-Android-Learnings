@@ -11,8 +11,11 @@ import com.example.androidlearning.domain.usecase.UpdateMoviesUseCase
 import com.example.androidlearning.domain.usecase.UpdateTvShowsUseCase
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
 @Module
+@InstallIn(SingletonComponent::class)
 class UseCaseModule {
 
     @Provides

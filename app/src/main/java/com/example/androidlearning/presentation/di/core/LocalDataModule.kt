@@ -13,9 +13,12 @@ import com.example.androidlearning.data.repository.tvshow.datasource.TvShowLocal
 import com.example.androidlearning.data.repository.tvshow.datasourceImpl.TvShowLocalDatasourceImpl
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
+@InstallIn(SingletonComponent::class)
 class LocalDataModule {
 
     @Singleton

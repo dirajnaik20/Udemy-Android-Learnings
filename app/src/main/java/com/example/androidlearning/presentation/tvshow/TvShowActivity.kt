@@ -1,6 +1,5 @@
 package com.example.androidlearning.presentation.tvshow
 
-import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,14 +11,13 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
-import androidx.lifecycle.liveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidlearning.R
 import com.example.androidlearning.databinding.ActivityTvShowBinding
-import com.example.androidlearning.presentation.di.Injector
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class TvShowActivity : AppCompatActivity() {
 
     @Inject
@@ -31,9 +29,9 @@ class TvShowActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_tv_show)
-        (application as Injector)
-            .createTvShowSubComponent()
-            .inject(this)
+//        (application as Injector)
+//            .createTvShowSubComponent()
+//            .inject(this)
         tvShowViewModel = ViewModelProvider(this, factory)
             .get(TvShowViewModel::class.java)
         initRecyclerView()

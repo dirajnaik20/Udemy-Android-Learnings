@@ -13,9 +13,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidlearning.R
 import com.example.androidlearning.databinding.ActivityArtistBinding
-import com.example.androidlearning.presentation.di.Injector
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class ArtistActivity : AppCompatActivity() {
     @Inject
     lateinit var factory: ArtistViewModelFactory
@@ -25,9 +26,9 @@ class ArtistActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_artist)
-        (application as Injector)
-            .createArtistSubComponent()
-            .inject(this)
+//        (application as Injector)
+//            .createArtistSubComponent()
+//            .inject(this)
         myViewModel = ViewModelProvider(this, factory)
             .get(ArtistViewModel::class.java)
         initRecyclerView()
