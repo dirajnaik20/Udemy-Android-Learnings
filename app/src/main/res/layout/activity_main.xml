@@ -18,6 +18,9 @@
         app:navGraph="@navigation/nav_graph" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:background="@color/search_background"
+        app:itemIconTint="@color/list_text"
+        app:itemTextColor="@color/list_text"
         android:id="@+id/bottomNavigationNews"
         android:layout_width="match_parent"
         android:layout_height="0dp"

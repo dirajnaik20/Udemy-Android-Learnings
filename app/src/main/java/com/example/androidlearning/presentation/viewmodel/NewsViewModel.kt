@@ -8,16 +8,20 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.androidlearning.data.model.APIResponse
 import com.example.androidlearning.data.util.Resource
 import com.example.androidlearning.domain.usecase.GetNewsHeadlinesUseCase
+import com.example.androidlearning.domain.usecase.GetSearchedNewsUseCase
+import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class NewsViewModel(
     private val app: Application,
-    private val getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase
+    private val getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase,
+    private val getSearchedNewsUseCase: GetSearchedNewsUseCase
 ) : AndroidViewModel(app) {
     val newHeadLines = MutableLiveData<Resource<APIResponse>>()
 
@@ -26,20 +30,45 @@ class NewsViewModel(
         newHeadLines.postValue(Resource.Loading())
 
         try {
-            if (isInternetAvailable(app)){
+            if (isInternetAvailable(app)) {
                 val apiResult = getNewsHeadlinesUseCase.execute(country, page)
                 newHeadLines.postValue(apiResult)
-            }
-            else{
+            } else {
                 newHeadLines.postValue(Resource.Error("No Internet Connection"))
             }
 
-        }
-        catch (e:Exception){
+        } catch (e: Exception) {
             newHeadLines.postValue(Resource.Error(e.message.toString()))
         }
 
 
+    }
+
+    //search News
+    val searchedNews = MutableLiveData<Resource<APIResponse>>()
+
+    fun searchNews(
+        country: String,
+        searchQuery: String,
+        page: Int
+    ) = viewModelScope.launch {
+        searchedNews.postValue(Resource.Loading())
+
+        try {
+            if (isInternetAvailable(app)) {
+                val response = getSearchedNewsUseCase.execute(
+                    country,
+                    searchQuery,
+                    page
+                )
+
+                searchedNews.postValue(response)
+            } else {
+                searchedNews.postValue(Resource.Error("No internet connection"))
+            }
+        } catch (e: Exception) {
+            searchedNews.postValue(Resource.Error(e.message.toString()))
+        }
 
     }
 

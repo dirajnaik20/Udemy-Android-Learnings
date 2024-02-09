@@ -50,6 +50,7 @@ class NewsFragment : Fragment() {
         newsAdapter.setOnItemClickListener {
             val bundle = Bundle().apply {
                 putSerializable("selected_article", it)
+                Log.i("MYTAG", "I am in NewsFragment ${it.url.toString()}")
             }
 
             findNavController().navigate(
@@ -104,6 +105,48 @@ class NewsFragment : Fragment() {
             }
         }
     }
+
+    //search function
+
+    private fun viewSearchedList() {
+
+        viewModel.searchedNews.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Resource.Success -> {
+                    hideProgressBar()
+                    response.data?.let {
+                        newsAdapter.differ.submitList(it.articles.toList())
+
+                        if (it.totalResults % 20 == 0) {
+                            pages = it.totalResults / 20
+                            Log.i("MYTAG", "I am in if to check number of pages")
+                        } else {
+                            pages = it.totalResults / 20 + 1
+                            Log.i("MYTAG", "I am in else to check number of pages")
+                        }
+                        isLastPage = page == pages
+                    }
+                }
+
+                is Resource.Error -> {
+                    hideProgressBar()
+                    response.message?.let {
+                        Toast.makeText(
+                            activity,
+                            "Error Occurred: $it",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+
+                is Resource.Loading -> {
+                    showProgressBar()
+                }
+
+            }
+        }
+    }
+
 
     private fun initRecyclerView() {
 //        newsAdapter = NewsAdapter()

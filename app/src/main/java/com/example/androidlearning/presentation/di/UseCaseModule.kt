@@ -2,6 +2,7 @@ package com.example.androidlearning.presentation.di
 
 import com.example.androidlearning.domain.repository.NewsRepository
 import com.example.androidlearning.domain.usecase.GetNewsHeadlinesUseCase
+import com.example.androidlearning.domain.usecase.GetSearchedNewsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,5 +17,12 @@ class UseCaseModule {
         newsRepository: NewsRepository
     ): GetNewsHeadlinesUseCase {
         return GetNewsHeadlinesUseCase(newsRepository)
+    }
+
+    @Provides
+    fun provideGetSearchedNewsHeadlinesUseCase(
+        newsRepository: NewsRepository
+    ): GetSearchedNewsUseCase {
+        return GetSearchedNewsUseCase(newsRepository)
     }
 }
