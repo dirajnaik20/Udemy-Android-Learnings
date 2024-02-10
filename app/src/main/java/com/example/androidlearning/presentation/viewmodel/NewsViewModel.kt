@@ -9,19 +9,26 @@ import android.os.Build
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.example.androidlearning.data.model.APIResponse
+import com.example.androidlearning.data.model.Article
 import com.example.androidlearning.data.util.Resource
 import com.example.androidlearning.domain.usecase.GetNewsHeadlinesUseCase
+import com.example.androidlearning.domain.usecase.GetSavedNewsUseCase
 import com.example.androidlearning.domain.usecase.GetSearchedNewsUseCase
+import com.example.androidlearning.domain.usecase.SaveNewsUseCase
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.security.PrivateKey
 
 class NewsViewModel(
     private val app: Application,
     private val getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase,
-    private val getSearchedNewsUseCase: GetSearchedNewsUseCase
+    private val getSearchedNewsUseCase: GetSearchedNewsUseCase,
+    private val saveNewsUseCase: SaveNewsUseCase,
+    private val getSavedNewsUseCase: GetSavedNewsUseCase
 ) : AndroidViewModel(app) {
     val newHeadLines = MutableLiveData<Resource<APIResponse>>()
 
@@ -99,5 +106,16 @@ class NewsViewModel(
             }
         }
         return result
+    }
+
+    fun saveNews(article: Article)=viewModelScope.launch {
+        saveNewsUseCase.execute(article)
+    }
+
+    fun getSavedNews()= liveData{
+        getSavedNewsUseCase.execute().collect{
+            emit(it)
+        }
+
     }
 }

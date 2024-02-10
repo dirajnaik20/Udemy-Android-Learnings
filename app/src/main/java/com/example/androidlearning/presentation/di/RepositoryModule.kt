@@ -1,6 +1,7 @@
 package com.example.androidlearning.presentation.di
 
 import com.example.androidlearning.data.repository.NewsRepositoryImpl
+import com.example.androidlearning.data.repository.datasource.NewsLocalDataSource
 import com.example.androidlearning.data.repository.datasource.NewsRemoteDataSource
 import com.example.androidlearning.domain.repository.NewsRepository
 import dagger.Module
@@ -13,7 +14,12 @@ import dagger.hilt.components.SingletonComponent
 class RepositoryModule {
     @Provides
     fun provideNewsRepository(
-        newsRemoteDataSource: NewsRemoteDataSource): NewsRepository {
-        return NewsRepositoryImpl(newsRemoteDataSource)
+        newsRemoteDataSource: NewsRemoteDataSource,
+        newsLocalDataSource: NewsLocalDataSource
+    ): NewsRepository {
+        return NewsRepositoryImpl(
+            newsRemoteDataSource,
+            newsLocalDataSource
+        )
     }
 }

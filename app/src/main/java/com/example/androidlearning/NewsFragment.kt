@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,9 @@ import com.example.androidlearning.data.util.Resource
 import com.example.androidlearning.databinding.FragmentNewsBinding
 import com.example.androidlearning.presentation.adapter.NewsAdapter
 import com.example.androidlearning.presentation.viewmodel.NewsViewModel
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class NewsFragment : Fragment() {
@@ -65,6 +69,7 @@ class NewsFragment : Fragment() {
 
         initRecyclerView()
         viewNewsList()
+        setSearchView()
     }
 
     private fun viewNewsList() {
@@ -107,6 +112,37 @@ class NewsFragment : Fragment() {
     }
 
     //search function
+
+    fun setSearchView() {
+        fragmentNewsBinding.svNews.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.searchNews(country, query.toString(), page)
+                viewSearchedList()
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                MainScope().launch {
+                    delay(2000)
+                    viewModel.searchNews(country, newText.toString(), page)
+                    viewSearchedList()
+                }
+                return false
+            }
+
+        })
+
+        fragmentNewsBinding.svNews.setOnCloseListener(object : SearchView.OnCloseListener {
+            override fun onClose(): Boolean {
+                initRecyclerView()
+                viewNewsList()
+                return false
+
+            }
+
+        })
+    }
 
     private fun viewSearchedList() {
 

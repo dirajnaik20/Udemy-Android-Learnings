@@ -53,6 +53,20 @@ dependencies {
     val lifecycle_version = "2.7.0"
     val nav_version = "2.7.6"
 
+    val room_version = "2.6.1"
+
+    //room
+
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+
+    // To use Kotlin annotation processing tool (kapt)
+    kapt("androidx.room:room-compiler:$room_version")
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$room_version")
+
+
     //Glide
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     kapt ("com.github.bumptech.glide:compiler:4.16.0")
@@ -68,7 +82,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
 
     // Annotation processor
-    kapt("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")
+//    kapt("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")
+    kapt("androidx.lifecycle:lifecycle-common-java8:$lifecycle_version")
 
 //    implementation("androidx.lifecycle:lifecycle-common-java8::$lifecycle_version")
 
@@ -85,7 +100,7 @@ dependencies {
 
     //Dagger-Hilt
     implementation("com.google.dagger:hilt-android:2.50")
-    kapt("com.google.dagger:hilt-android-compiler:2.50")
+    kapt("com.google.dagger:hilt-compiler:2.50")
 
 
     implementation("androidx.core:core-ktx:1.12.0")

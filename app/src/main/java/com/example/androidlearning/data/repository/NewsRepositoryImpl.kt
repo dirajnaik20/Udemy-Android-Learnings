@@ -2,6 +2,7 @@ package com.example.androidlearning.data.repository
 
 import com.example.androidlearning.data.model.APIResponse
 import com.example.androidlearning.data.model.Article
+import com.example.androidlearning.data.repository.datasource.NewsLocalDataSource
 import com.example.androidlearning.data.repository.datasource.NewsRemoteDataSource
 import com.example.androidlearning.data.util.Resource
 import com.example.androidlearning.domain.repository.NewsRepository
@@ -9,7 +10,8 @@ import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
 class NewsRepositoryImpl(
-    private val newsRemoteDataSource: NewsRemoteDataSource
+    private val newsRemoteDataSource: NewsRemoteDataSource,
+    private val newsLocalDataSource: NewsLocalDataSource
 ) : NewsRepository {
     override suspend fun getNewsHeadlines(country:String,page:Int): Resource<APIResponse> {
         return responseToResource(newsRemoteDataSource.getTopHeadlines(country,page))
@@ -31,8 +33,8 @@ class NewsRepositoryImpl(
         return responseToResource(newsRemoteDataSource.getSearchedNews(country,searchQuery,page))
     }
 
-    override fun saveNews(article: Article) {
-        TODO("Not yet implemented")
+    override suspend fun saveNews(article: Article) {
+        newsLocalDataSource.getSavedNewsToDB(article)
     }
 
     override fun deleteNews(article: Article) {
@@ -40,6 +42,6 @@ class NewsRepositoryImpl(
     }
 
     override fun getSavedNews(): Flow<List<Article>> {
-        TODO("Not yet implemented")
+        return newsLocalDataSource.getSavedArticles()
     }
 }
