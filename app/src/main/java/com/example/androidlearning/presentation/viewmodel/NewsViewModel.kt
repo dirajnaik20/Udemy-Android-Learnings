@@ -14,6 +14,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.androidlearning.data.model.APIResponse
 import com.example.androidlearning.data.model.Article
 import com.example.androidlearning.data.util.Resource
+import com.example.androidlearning.domain.usecase.DeleteSavedNewsUseCase
 import com.example.androidlearning.domain.usecase.GetNewsHeadlinesUseCase
 import com.example.androidlearning.domain.usecase.GetSavedNewsUseCase
 import com.example.androidlearning.domain.usecase.GetSearchedNewsUseCase
@@ -28,7 +29,8 @@ class NewsViewModel(
     private val getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase,
     private val getSearchedNewsUseCase: GetSearchedNewsUseCase,
     private val saveNewsUseCase: SaveNewsUseCase,
-    private val getSavedNewsUseCase: GetSavedNewsUseCase
+    private val getSavedNewsUseCase: GetSavedNewsUseCase,
+    private val deleteSavedNewsUseCase: DeleteSavedNewsUseCase
 ) : AndroidViewModel(app) {
     val newHeadLines = MutableLiveData<Resource<APIResponse>>()
 
@@ -117,5 +119,9 @@ class NewsViewModel(
             emit(it)
         }
 
+    }
+
+    fun deleteArticle(article: Article)=viewModelScope.launch {
+        deleteSavedNewsUseCase.execute(article)
     }
 }

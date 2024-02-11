@@ -43,6 +43,8 @@ class NewsFragment : Fragment() {
 
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragmentNewsBinding = FragmentNewsBinding.bind(view)
@@ -125,8 +127,11 @@ class NewsFragment : Fragment() {
 
                 MainScope().launch {
                     delay(2000)
-                    viewModel.searchNews(country, newText.toString(), page)
-                    viewSearchedList()
+                    if (view != null) {
+                        viewModel.searchNews(country, newText.toString(), page)
+                        viewSearchedList()
+                    }
+
                 }
                 return false
             }

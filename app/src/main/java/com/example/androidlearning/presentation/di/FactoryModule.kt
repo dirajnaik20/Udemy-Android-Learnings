@@ -1,6 +1,7 @@
 package com.example.androidlearning.presentation.di
 
 import android.app.Application
+import com.example.androidlearning.domain.usecase.DeleteSavedNewsUseCase
 import com.example.androidlearning.domain.usecase.GetNewsHeadlinesUseCase
 import com.example.androidlearning.domain.usecase.GetSavedNewsUseCase
 import com.example.androidlearning.domain.usecase.GetSearchedNewsUseCase
@@ -21,7 +22,8 @@ class FactoryModule {
         getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase,
         getSearchedNewsUseCase: GetSearchedNewsUseCase,
         saveNewsUseCase: SaveNewsUseCase,
-        getSavedNewsUseCase: GetSavedNewsUseCase
+        getSavedNewsUseCase: GetSavedNewsUseCase,
+        deleteSavedNewsUseCase: DeleteSavedNewsUseCase
 
 
     ): NewsViewModelFactory {
@@ -30,7 +32,8 @@ class FactoryModule {
             getNewsHeadlinesUseCase,
             getSearchedNewsUseCase,
             saveNewsUseCase,
-            getSavedNewsUseCase
+            getSavedNewsUseCase,
+            deleteSavedNewsUseCase
         )
     }
 }

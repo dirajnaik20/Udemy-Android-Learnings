@@ -6,5 +6,5 @@ import com.example.androidlearning.data.util.Resource
 import com.example.androidlearning.domain.repository.NewsRepository
 
 class DeleteSavedNewsUseCase(private val newsRepository: NewsRepository) {
-    suspend fun execute(article: Article) = newsRepository.deleteNews(article)
+    suspend fun execute(article: Article) = newsRepository.deleteArticle(article)
 }

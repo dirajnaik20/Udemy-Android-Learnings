@@ -1,6 +1,7 @@
 package com.example.androidlearning.presentation.di
 
 import com.example.androidlearning.domain.repository.NewsRepository
+import com.example.androidlearning.domain.usecase.DeleteSavedNewsUseCase
 import com.example.androidlearning.domain.usecase.GetNewsHeadlinesUseCase
 import com.example.androidlearning.domain.usecase.GetSavedNewsUseCase
 import com.example.androidlearning.domain.usecase.GetSearchedNewsUseCase
@@ -39,5 +40,11 @@ class UseCaseModule {
         newsRepository: NewsRepository
     ): GetSavedNewsUseCase {
         return GetSavedNewsUseCase(newsRepository)
+    }
+    @Provides
+    fun provideDeleteSavedNewsUseCase(
+        newsRepository: NewsRepository
+    ): DeleteSavedNewsUseCase {
+        return DeleteSavedNewsUseCase(newsRepository)
     }
 }
